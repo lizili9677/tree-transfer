@@ -24,7 +24,6 @@
         ></el-input>
         <el-tree
           ref="from-tree"
-          show-checkbox
           :lazy="lazy"
           :indent="indent"
           :draggable="draggable"

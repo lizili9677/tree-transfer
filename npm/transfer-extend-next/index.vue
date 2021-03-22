@@ -6,14 +6,6 @@
       ref="wl-transfer-component"
       @add-btn="handleAddBtn"
       @remove-btn="handleRemoveBtn"
-      @left-check-change="handleLeftCheckChange"
-      @right-check-change="handleRightCheckChange"
-      @node-drag-start="handleNodeDragStart"
-      @node-drag-enter="handleNodeDragEnter"
-      @node-drag-leave="handleNodeDragLeave"
-      @node-drag-over="handleNodeDragOver"
-      @node-drag-end="handleNodeDragEnd"
-      @node-drop="handleNodeDrop"
     >
       <template #left-footer v-if="$slots['left-footer']">
         <slot name="left-footer"></slot>
@@ -248,40 +240,16 @@ export default {
   computed: {
     // 穿梭框模式
     isComponent() {
-      return this.mode == "transfer" ? "ComponentTransfer" : "ComponentAddress";
+      return this.mode === "transfer" ? "ComponentTransfer" : "ComponentAddress";
     },
   },
   methods: {
     // -----------------------------------------------emit回调---------------------------------------------
-    handleAddBtn(fromData, toData, obj) {
-      this.$emit("add-btn", fromData, toData, obj);
+    handleAddBtn(toData) {
+      this.$emit("add-btn", toData);
     },
-    handleRemoveBtn(fromData, toData, obj) {
-      this.$emit("remove-btn", fromData, toData, obj);
-    },
-    handleLeftCheckChange(nodeObj, treeObj, checkAll) {
-      this.$emit("left-check-change", nodeObj, treeObj, checkAll);
-    },
-    handleRightCheckChange(nodeObj, treeObj, checkAll) {
-      this.$emit("right-check-change", nodeObj, treeObj, checkAll);
-    },
-    handleNodeDragStart(type, node, dragEvent) {
-      this.$emit("node-drag-start", type, node, dragEvent);
-    },
-    handleNodeDragEnter(type, node, target, dragEvent) {
-      this.$emit("node-drag-enter", type, node, target, dragEvent);
-    },
-    handleNodeDragLeave(type, node, leaved, dragEvent) {
-      this.$emit("node-drag-leave", type, node, leaved, dragEvent);
-    },
-    handleNodeDragOver(type, node, leaved, dragEvent) {
-      this.$emit("node-drag-over", type, node, leaved, dragEvent);
-    },
-    handleNodeDragEnd(type, node, target, location, dragEvent) {
-      this.$emit("node-drag-end", type, node, target, location, dragEvent);
-    },
-    handleNodeDrop(type, node, target, location, dragEvent) {
-      this.$emit("node-drop", type, node, target, location, dragEvent);
+    handleRemoveBtn(toData) {
+      this.$emit("remove-btn", toData);
     },
     // ---------------------------------------方法----------------------------------------------------
     /**

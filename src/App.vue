@@ -35,10 +35,6 @@
         :from_data="fromData"
         :filterNode="filterNode"
         :defaultProps="defaultProps"
-        :defaultCheckedKeys="defaultCheckedKeys"
-        :defaultExpandedKeys="[2, 3]"
-        @right-check-change="rightCheckChange"
-        @left-check-change="leftCheckChange"
         @remove-btn="remove"
         @add-btn="add"
         node_key="id"
@@ -51,14 +47,14 @@
 <script>
 // import treeTransfer from "el-tree-transfer";
 // import treeTransfer from "../npm/lib/transfer-extend"; // npm源码位置
-// import treeTransfer from "../npm/transfer-extend-next/index.vue"; // next源码位置
-import treeTransfer from "../npm/dist/treeTransfer.min.js"; // next打包后代码位置
+import treeTransfer from "../npm/transfer-extend-next/index.vue"; // next源码位置
+// import treeTransfer from "../npm/dist/treeTransfer.min.js"; // next打包后代码位置
 
 export default {
   name: "App",
   data() {
     return {
-      mode: "transfer", // transfer addressList
+      mode: "addressList", // transfer addressList
       defaultProps: {
         label: "name",
         children: "children",
@@ -77,6 +73,7 @@ export default {
               pid: 1,
               name: "水电费是打发斯蒂芬斯蒂芬gas噶水电费噶地方死光光",
               children: [],
+              path: '水电费是打发斯蒂芬斯蒂芬gas噶水电费噶地方死光光'
             },
             {
               id: 3,
@@ -92,6 +89,7 @@ export default {
                       id: "11-3-1-1",
                       name: "11-3-1-1",
                       pid: "11-3-1",
+                      path: '11-3-1'
                     },
                   ],
                 },
@@ -111,6 +109,7 @@ export default {
                       id: 111,
                       pid: 5,
                       name: "11-111",
+                      path: '11-3-1'
                     },
                   ],
                 },
@@ -123,6 +122,7 @@ export default {
                       id: "6-1",
                       pid: 6,
                       name: "6-1",
+                      path: '6-1'
                     },
                   ],
                 },
@@ -272,32 +272,16 @@ export default {
       }
     },
     // 添加按钮
-    add(fromData, toData, obj) {
+    add(toData) {
       // 树形穿梭框模式transfer时，返回参数为左侧树移动后数据、右侧树移动后数据、移动的{keys,nodes,halfKeys,halfNodes}对象
       // 通讯录模式addressList时，返回参数为右侧收件人列表、右侧抄送人列表、右侧密送人列表
-      console.log("fromData:", fromData);
-      console.log("toData:", toData);
-      console.log("obj:", obj);
+      console.log("fromData:", toData);
     },
     // 移除按钮
-    remove(fromData, toData, obj) {
+    remove(toData) {
       // 树形穿梭框模式transfer时，返回参数为左侧树移动后数据、右侧树移动后数据、移动的{keys,nodes,halfKeys,halfNodes}对象
       // 通讯录模式addressList时，返回参数为右侧收件人列表、右侧抄送人列表、右侧密送人列表
-      console.log("fromData:", fromData);
-      console.log("toData:", toData);
-      console.log("obj:", obj);
-    },
-    // 左侧源数据选中事件
-    leftCheckChange(nodeObj, treeObj, checkAll) {
-      console.log(nodeObj);
-      console.log(treeObj);
-      console.log(checkAll);
-    },
-    // 右侧目标数据选中事件
-    rightCheckChange(nodeObj, treeObj, checkAll) {
-      console.log(nodeObj);
-      console.log(treeObj);
-      console.log(checkAll);
+      console.log("fromData:", toData);
     },
     // 自定义节点 仅树形结构支持
     renderContent(h, { node, data, store }) {
@@ -313,7 +297,7 @@ export default {
             </el-button>
           </span>
         </span>
-      );
+      )
     },
     // 标题自定义区点击事件
     handleTitleRight() {
